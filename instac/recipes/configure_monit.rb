@@ -1,7 +1,7 @@
 Chef::Log.info("Creating monitrc config file for push server ....")
 
 template "/etc/monit/conf.d/autols_all-push-server.monitrc" do
-	source 'node_web_app.monitrc.erb'
+	source 'autols_all-push-server.monitrc.erb'
 	owner 'root'
 	group 'root'
 	mode '0644'
