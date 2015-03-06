@@ -21,6 +21,7 @@ template "/etc/monit/conf.d/node_web_app-autols_all.monitrc" do
 	mode '0644'
 	variables(
 	  :dest_path => "#{node[:document_root]}",
+	  :application_name => "#{node[:application_name]}",
 	  :monitored_script => "#{node[:document_root]}/current/dist/server/app.js",
 	  :ssl_support => "#{node[:ssl_support]}",
 	  :ssl_port => "#{node[:ssl_port]}",
