@@ -1,12 +1,12 @@
-template "/etc/nginx/sites-available/default" do
-  source "default-site.erb"
+template "/etc/nginx/sites-enabled/default" do
+  source "nginx_default.erb"
   owner "root"
   group "root"
   mode 0644
 end
 
 if node[:ssl_support]
-	Chef::Log.info("Installing local mongoDB ....")
+	Chef::Log.info("Creating new certificates....")
 	Chef::Log.info(`sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/nginx/ssl/nginx.key -out /etc/nginx/ssl/nginx.crt`)	
 end
 

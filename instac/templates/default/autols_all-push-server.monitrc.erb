@@ -1,4 +1,4 @@
 check host autols_all-push-server with address 127.0.0.1
-        start program = "/bin/bash -c 'cd  ; source <%= @dest_path %>/shared/app.env ;/usr/bin/env NODE_ENV=production NODE_PATH=<%= @dest_path %>/node_modules /usr/local/bin/node <%= @dest_path %>/server/push/server/main.js --log-file=<%= @dest_path %>/push-logs/push-server.log &>> <%= @dest_path %>/push-logs/push-server-console.log'"
-        stop program = "/usr/bin/pkill -f 'node <%= @dest_path %>/server/push/server/main.js'"
+        start program = "/bin/bash -c 'cd  ; source <%= @dest_path %>/shared/app.env ;/usr/bin/env NODE_ENV=production NODE_PATH=<%= @dest_path %>/current/node_modules /usr/local/bin/node <%= @dest_path %>/current/server/push/server/main.js --log-file=<%= @dest_path %>/push-logs/push-server.log &>> <%= @dest_path %>/push-logs/push-server-console.log'"
+        stop program = "/usr/bin/pkill -f 'node <%= @dest_path %>/current/server/push/server/main.js'"
         if failed port 41414 type tcp then restart 
