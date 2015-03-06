@@ -1,0 +1,11 @@
+check host node_web_app_<%= @application_name %> with address 127.0.0.1
+  start program = "/bin/bash -c 'cd <%= @dest_path %>/current ; source <%= @dest_path %>/shared/app.env ; /usr/bin/env NODE_ENV=<%= @nodeJS_env %> NODE_PATH=<%= @dest_path %>/current/node_modules:<%= @dest_path %>/current /usr/local/bin/node <%= @monitored_script %> 2>&1| multilog t s1048576 n100 !tai64nlocal ./log/'"
+  stop program = "/usr/bin/pkill -f 'node <%= @monitored_script %>'"
+  <% if @node[:ssl_support] -%>
+  if failed port <%= @ssl_port %> type TCPSSL protocol HTTP
+  <% else -%>
+  if failed port <%= @port %> protocol HTTP
+  <% end -%>
+    request /
+    with timeout 10 seconds
+    then restart
