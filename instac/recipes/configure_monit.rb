@@ -7,8 +7,14 @@ template "/etc/monit/conf.d/autols_all-push-server.monitrc" do
 	mode '0644'
 	variables(
 	  :dest_path => "#{node[:document_root]}"
-	)
-	notifies :restart, "service[monit]", :immediately
+	)	
+end
+
+ruby_block "Reloading monit configuration" do
+  block do
+    Chef::Log.info(`sudo monit reload`)
+    raise "Fail to reloading monit configuration" unless $?.success?
+  end
 end
 
 ruby_block "Restarting REST server ...." do
