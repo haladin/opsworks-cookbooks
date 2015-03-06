@@ -1,3 +1,4 @@
+<% if @node[:http_support] -%>
 server {		
         listen <%= @node[:http_port] %> default_server;
         listen [::]:<%= @node[:http_port] %> default_server ipv6only=on;
@@ -69,7 +70,7 @@ server {
                 include fastcgi_params;
         }
 }
-
+<% end -%>
 <% if @node[:ssl_support] -%>
 #
 # HTTPS server
