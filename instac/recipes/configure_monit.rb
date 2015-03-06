@@ -14,7 +14,7 @@ end
 Chef::Log.info("Creating monitrc config file for REST server ....")
 
 template "/etc/monit/conf.d/node_web_app-autols_all.monitrc" do
-	source 'node_web_app.monitrc.erb'
+	source 'node.monitrc.erb'
 	owner 'root'
 	group 'root'
 	mode '0644'
