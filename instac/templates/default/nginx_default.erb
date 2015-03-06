@@ -1,6 +1,6 @@
 server {		
-		listen 80 default_server;
-        listen [::]:80 default_server ipv6only=on;
+		listen <%= @node[:http_port] %> default_server;
+        listen [::]:<%= @node[:http_port] %> default_server ipv6only=on;
         root <%= @node[:document_root] %>/current/dist/public/static;
         index index.html index.htm;
         # Do not blindly add this header globally since some scripts add it themselves
@@ -75,8 +75,8 @@ server {
 # HTTPS server
 #
 server {
-    listen 443 default_server;
-    listen [::]:443 default_server ipv6only=on;
+    listen <%= @node[:ssl_port] %> default_server;
+    listen [::]:<%= @node[:ssl_port] %> default_server ipv6only=on;
     root <%= @node[:document_root] %>/current/dist/public/static;
     index index.html index.htm;
     ssl on;
