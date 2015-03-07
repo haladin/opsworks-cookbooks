@@ -1,7 +1,7 @@
 ruby_block "Run NPM Install" do
   block do
-    Chef::Log.info("Installing node modules at #{node[:document_root]}/current NODE_ENV=#{node[:nodeJS_env]}")
-    Chef::Log.info(`cd #{node[:document_root]}/current && NODE_ENV=#{node[:nodeJS_env]} npm install`)
+    Chef::Log.info("Installing node modules in #{node[:document_root]}/current NODE_ENV=#{node[:nodeJS_env]}")
+    Chef::Log.info(`sudo su - deploy -c 'cd #{node[:document_root]}/current && NODE_ENV=#{node[:nodeJS_env]} npm install'`)
     raise "NPM Install FAILED" unless $?.success?
   end
 end
