@@ -8,7 +8,7 @@ end
 
 Chef::Log.info("Install Grunt and Boower")
 execute "install grunt" do
-  command "NODE_ENV=#{node[:nodeJS_env]} npm install -g bower grunt grunt-cli"
+  command "sudo NODE_ENV=#{node[:nodeJS_env]} npm install -g bower grunt grunt-cli"
   not_if "[ -f /usr/local/bin/grunt ]"
 end
 
