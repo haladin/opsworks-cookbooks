@@ -15,7 +15,7 @@ end
 ruby_block "Run Bower Install" do
   block do
     Chef::Log.info("bower install")
-    Chef::Log.info(`cd #{node[:document_root]}/current && bower install --allow-root`)
+    Chef::Log.info(`sudo su - deploy -c 'cd #{node[:document_root]}/current && bower install --allow-root'`)
     raise "Bower Install FAILED" unless $?.success?
   end
 end
@@ -23,7 +23,7 @@ end
 ruby_block "Run Grunt Build" do
   block do
     Chef::Log.info("grunt build")
-    Chef::Log.info(`cd #{node[:document_root]}/current && NODE_ENV=#{node[:nodeJS_env]} grunt build`)
+    Chef::Log.info(`sudo su - deploy -c 'cd #{node[:document_root]}/current && NODE_ENV=#{node[:nodeJS_env]} grunt build'`)
     raise "Grunt Build FAILED" unless $?.success?
   end
 end
