@@ -16,7 +16,7 @@ server {
                 proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
                 proxy_set_header Host $http_host;
                 proxy_set_header X-NginX-Proxy true;
-                proxy_pass http://localhost:8080/;
+                proxy_pass http://localhost:<%= @node[:port] %>/;
                 proxy_redirect off;
                 proxy_http_version 1.1;
                 proxy_set_header Upgrade $http_upgrade;
@@ -44,7 +44,7 @@ server {
                 # try_files $uri $uri/ =404;
                 # Uncomment to enable naxsi on this location
                 # include /etc/nginx/naxsi.rules
-                proxy_pass http://localhost:41414;
+                proxy_pass http://localhost:<%= @node[:push_port] %>;
                 proxy_http_version 1.1;
                 proxy_set_header Upgrade $http_upgrade;
                 proxy_set_header Connection "upgrade";
@@ -81,8 +81,8 @@ server {
     root <%= @node[:document_root] %>/current/dist/public/static;
     index index.html index.htm;
     ssl on;
-    ssl_certificate <%= @node[:ssl_certificate_path] %>;
-    ssl_certificate_key <%= @node[:ssl_certificate_key_path] %>;
+    ssl_certificate <%= @node[:ssl_certificate_path] %>/<%= @node[:ssl_certificate_name] %>;
+    ssl_certificate_key <%= @node[:ssl_certificate_path] %>/<%= @node[:ssl_certificate_key_name] %>;
     ssl_session_timeout 5m;
     ssl_protocols SSLv3 TLSv1 TLSv1.1 TLSv1.2;
     ssl_ciphers "HIGH:!aNULL:!MD5 or HIGH:!aNULL:!MD5:!3DES";
@@ -94,7 +94,7 @@ server {
                 proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
                 proxy_set_header Host $http_host;
                 proxy_set_header X-NginX-Proxy true;
-                proxy_pass http://localhost:8081/;
+                proxy_pass http://localhost:<%= @node[:port] %>/;
                 proxy_redirect off;
                 proxy_http_version 1.1;
                 proxy_set_header Upgrade $http_upgrade;
@@ -122,7 +122,7 @@ server {
             # try_files $uri $uri/ =404;
             # Uncomment to enable naxsi on this location
             # include /etc/nginx/naxsi.rules
-            proxy_pass http://localhost:41414;
+            proxy_pass http://localhost:<%= @node[:push_port] %>;
             proxy_http_version 1.1;
             proxy_set_header Upgrade $http_upgrade;
             proxy_set_header Connection "upgrade";
